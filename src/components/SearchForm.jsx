@@ -1,5 +1,6 @@
 // src/components/SearchForm.jsx
 import React, { useState } from "react";
+import { toast } from "sonner";
 
 const SearchForm = ({ onSearch }) => {
   const [username, setUsername] = useState("");
@@ -8,6 +9,9 @@ const SearchForm = ({ onSearch }) => {
     e.preventDefault();
     if (username.trim()) {
       onSearch(username.trim());
+      toast.success;
+    } else {
+      toast.error("Please enter a username!");
     }
   };
 

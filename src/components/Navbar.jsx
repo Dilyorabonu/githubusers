@@ -1,5 +1,6 @@
 // src/components/Navbar.jsx
 import React from "react";
+import { Link } from "react-router-dom";
 
 //icons
 import { IoMdSunny, IoMdMoon } from "react-icons/io";
@@ -8,7 +9,9 @@ const Navbar = ({ toggleTheme, theme }) => {
   return (
     <div className="navbar bg-base-100 shadow-md p-4">
       <div className="flex-1">
-        <a className="text-xl font-bold">devfinder</a>
+        <Link to="/" className="text-xl font-bold">
+          devfinder
+        </Link>
       </div>
       <div className="flex-none">
         <button onClick={toggleTheme} className="btn btn-ghost">

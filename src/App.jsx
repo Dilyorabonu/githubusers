@@ -1,10 +1,12 @@
 // src/App.jsx
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Toaster, toast } from "sonner";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import SearchForm from "./components/SearchForm";
-import UserCard from "./components/UserCard";
-import BarChart from "./components/BarChart";
+import UserCard from "./components/UserCard"; // Import UserCard
+import MoreStats from "./components/MoreStats"; // Import MoreStats
 import "./index.css";
 
 const App = () => {
@@ -35,10 +37,12 @@ const App = () => {
       setUser(response.data);
       localStorage.setItem("user", JSON.stringify(response.data));
       fetchLanguages(username);
+      toast.success(`User ${username} fetched successfully!`);
     } catch (error) {
       console.error("User not found");
       setUser(null);
       localStorage.removeItem("user");
+      toast.error(`User ${username} not found!`);
     }
   };
 
@@ -71,16 +75,43 @@ const App = () => {
   };
 
   return (
-    <div className="min-h-screen bg-base-200 text-base-content">
-      <Navbar toggleTheme={toggleTheme} theme={theme} />
-      <div className="container mx-auto p-4">
-        <SearchForm onSearch={fetchUser} />
-        <UserCard user={user} />
-        {user && languagesData.length > 0 && (
-          <BarChart data={languagesData} categories={languagesCategories} />
-        )}
+    <Router>
+      <div className="min-h-screen bg-base-200 text-base-content">
+        <Navbar toggleTheme={toggleTheme} theme={theme} />
+        <Toaster position="bottom-center" />
+        <div className="container mx-auto p-4">
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <>
+                  <SearchForm onSearch={fetchUser} />
+                  <UserCard user={user} />
+                  {user && (
+                    <Link
+                      to="/more-stats"
+                      className="text-blue-500 hover:underline mt-4 block text-center"
+                    >
+                      View more statistics
+                    </Link>
+                  )}
+                </>
+              }
+            />
+            <Route
+              path="/more-stats"
+              element={
+                <MoreStats
+                  user={user}
+                  languagesData={languagesData}
+                  languagesCategories={languagesCategories}
+                />
+              }
+            />
+          </Routes>
+        </div>
       </div>
-    </div>
+    </Router>
   );
 };
 

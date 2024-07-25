@@ -1,7 +1,5 @@
 // src/components/UserCard.jsx
 import React from "react";
-
-// icons
 import { FaTwitter, FaLink } from "react-icons/fa";
 import { HiMiniBuildingOffice2 } from "react-icons/hi2";
 import { FaLocationDot } from "react-icons/fa6";
@@ -44,12 +42,10 @@ const UserCard = ({ user }) => {
       </div>
       <div className="mt-6 space-y-4">
         <div className="flex items-center justify-center md:justify-start space-x-2">
-          {/* location icon */}
           <FaLocationDot className="w-5 h-5 text-gray-500" />
           <span>{user.location || "Not Available"}</span>
         </div>
         <div className="flex items-center justify-center md:justify-start space-x-2">
-          {/* blog icon */}
           <FaLink className="w-5 h-5 text-gray-500" />
           <a
             href={user.blog}
@@ -61,7 +57,6 @@ const UserCard = ({ user }) => {
           </a>
         </div>
         <div className="flex items-center justify-center md:justify-start space-x-2">
-          {/* twitter icon */}
           <FaTwitter className="w-5 h-5 text-gray-500" />
           <span>
             {user.twitter_username
@@ -70,7 +65,6 @@ const UserCard = ({ user }) => {
           </span>
         </div>
         <div className="flex items-center justify-center md:justify-start space-x-2">
-          {/* company icon */}
           <HiMiniBuildingOffice2 className="w-5 h-5 text-gray-500" />
           <a
             href={user.html_url}
